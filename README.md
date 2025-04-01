@@ -21,55 +21,7 @@ AI: OpenAI API (NLP, summarization).
 Backend: Firebase Realtime Database (collaboration).
 File Processing: PyPDF2 (PDF parsing).
 Deployment: Cloud-hosted (e.g., Bubble/Firebase).
-Installation and Setup
-Clone the Repository:
-bash
 
-Collapse
-
-Wrap
-
-Copy
-git clone https://github.com/[your-teamname]/hackathon-teamname-docuai.git
-Bubble Setup:
-Import the Bubble project file (docuai_bubble_project.json) into Bubble.io.
-Configure the API Connector plugin with your OpenAI API key.
-Firebase Setup:
-Create a Firebase project at firebase.google.com.
-Enable Realtime Database and paste the config into Bubble’s API Connector.
-Set database rules to allow read/write for demo purposes:
-json
-
-Collapse
-
-Wrap
-
-Copy
-{
-  "rules": { ".read": true, ".write": true }
-}
-OpenAI API:
-Obtain an API key from openai.com.
-Add it to Bubble’s API Connector (Authorization: Bearer YOUR_API_KEY).
-Run Locally:
-No local server needed; test via Bubble’s preview mode.
-Usage
-Open the Bubble app in a browser.
-Upload sample PDFs/text files via the interface.
-Enter natural language queries (e.g., “Find budget reports”).
-Collaborate with team members in real-time via the shared chat.
-Development Stage
-Core features (search, summaries, collaboration) implemented.
-Tested with PDFs; expandable to other formats.
-GitHub submission adheres to naming: hackathon-teamname-docuai.
-Challenges and Solutions
-Real-Time: Firebase overcomes Bubble’s lack of WebSockets.
-File Support: Focused on PDFs with PyPDF2; more formats planned.
-Performance: Pre-indexed embeddings ensure fast responses.
-Future Enhancements
-Support for Word, PowerPoint files.
-Fine-tuned AI for enterprise datasets.
-User authentication for security.
 Team
 Sumit kumar - Lead Developer
 Shubh Raj Gupta - Backend developer
