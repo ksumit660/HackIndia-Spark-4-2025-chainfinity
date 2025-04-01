@@ -1,92 +1,131 @@
-Project Overview
-DocuAI is a Software-as-a-Service (SaaS) solution developed for the [Hackathon Name] on April 01, 2025. It leverages artificial intelligence (AI), natural language processing (NLP), and real-time collaboration to revolutionize document search and retrieval. Designed to address inefficiencies in traditional keyword-based systems, DocuAI empowers teams with smart search, AI-generated summaries, and a collaborative workspace.
+# DocuAI - AI-Powered Collaborative Document Search & Retrieval Assistant
 
-Problem Statement
-Employees lose productivity navigating complex file structures and lengthy documents. DocuAI solves this by enabling natural language queries, instant summaries, and team-driven document interaction.
+## Overview
+DocuAI is a **Software-as-a-Service (SaaS)** platform built for **[Hackathon Name]** on April 01, 2025. It enhances document search using **AI-driven natural language processing (NLP), summarization, and real-time team collaboration**. Unlike traditional tools, DocuAI provides **semantic search, AI-generated summaries, and collaborative query refinement**, boosting workplace efficiency.
 
-Features
-Smart Search: Semantic retrieval using NLP (e.g., BERT-based models).
-AI Summaries: Concise insights from documents via summarization algorithms.
-Recommendations: Context-aware file/topic suggestions with vector embeddings.
-Multi-Format Support: Processes PDFs and text; expandable to Word, slides.
-Real-Time Collaboration: Shared workspace powered by Firebase.
-Security: Encrypted cloud storage for fast, safe access.
-Novelty
-DocuAI’s collaborative AI workspace sets it apart from tools like ChatGPT, allowing teams to query, refine, and explore documents together in real-time.
+---
 
-Tech Stack
-Frontend: Bubble (no-code platform).
-AI Backend: OpenAI API (NLP and summarization).
-Collaboration: Firebase Realtime Database.
-File Processing: PyPDF2 (PDF parsing).
-Deployment: Cloud-hosted via Bubble and Firebase.
-Installation
-Prerequisites
-Bubble account (bubble.io).
-Firebase account (firebase.google.com).
-OpenAI API key (openai.com).
-Git installed locally.
-Steps
-Clone the Repository:
-bash
+## 🚀 Problem Statement
+Employees waste time navigating complex file structures and skimming documents due to rigid keyword searches. **DocuAI** solves this by offering:
+- **Smart Search** with NLP-based semantic retrieval.
+- **AI Summaries** for concise insights from lengthy files.
+- **Collaborative Query Refinement** for team-based document search.
 
-Collapse
+---
 
-Wrap
+## 🔑 Key Features
+✅ **Smart Search:** AI-powered semantic retrieval (e.g., BERT-based NLP).  
+✅ **AI Summaries:** Auto-generated concise document insights.  
+✅ **Recommendations:** Context-aware suggestions via vector embeddings.  
+✅ **Multi-Format Support:** Processes PDFs, text (expandable to Word, PowerPoint).  
+✅ **Real-Time Collaboration:** Shared workspace using Firebase.  
+✅ **Secure Access:** Encrypted cloud storage for fast, safe retrieval.  
 
-Copy
+### 🎯 **Novelty**
+Unlike traditional search tools like ChatGPT, **DocuAI** provides a **collaborative AI workspace**, allowing **teams to refine queries together in real time**.
+
+---
+
+## 🛠️ Tech Stack
+**Frontend:** [Bubble.io](https://bubble.io) (No-code web interface)  
+**AI & NLP:** OpenAI API (Natural Language Processing, Summarization)  
+**Backend:** Firebase Realtime Database (Live collaboration)  
+**File Processing:** PyPDF2 (PDF parsing)  
+**Deployment:** Cloud-hosted (Bubble/Firebase)
+
+---
+
+## 📌 Installation & Setup
+### 1️⃣ Clone the Repository:
+```bash
 git clone https://github.com/[your-teamname]/hackathon-teamname-docuai.git
 cd hackathon-teamname-docuai
-Set Up Bubble:
-Import docuai_bubble_project.json into Bubble.
-Configure the API Connector with your OpenAI API key:
-text
+```
 
-Collapse
+### 2️⃣ Bubble Setup:
+- Import the Bubble project file: `docuai_bubble_project.json` into [Bubble.io](https://bubble.io).
+- Install **API Connector plugin**.
+- Configure OpenAI API key in the **API Connector**.
 
-Wrap
+### 3️⃣ Firebase Setup:
+- Create a Firebase project at [Firebase Console](https://console.firebase.google.com/).
+- Enable **Realtime Database**.
+- Paste Firebase configuration into Bubble’s API Connector.
+- Set database rules (for demo purposes):
+```json
+{
+  "rules": { ".read": true, ".write": true }
+}
+```
 
-Copy
-Authorization: Bearer YOUR_API_KEY
-Endpoint: https://api.openai.com/v1/chat/completions
-Set Up Firebase:
-Create a Firebase project and enable Realtime Database.
-Add Firebase config to Bubble’s API Connector (found in Firebase console).
-Set permissive rules for demo:
-json
+### 4️⃣ OpenAI API Setup:
+- Get an API key from [OpenAI](https://openai.com/).
+- Add it to **Bubble’s API Connector** under authorization:
+```plaintext
+Bearer YOUR_API_KEY
+```
 
-Collapse
+### 5️⃣ Run the Project:
+No local server needed! Test via **Bubble’s preview mode**.
 
-Wrap
+---
 
-Copy
-{ "rules": { ".read": "true", ".write": "true" } }
-Test the App:
-Upload sample PDFs/text files in Bubble’s preview mode.
-Run queries and collaborate via the shared interface.
-Usage
-Access the Bubble app URL (provided post-deployment).
-Upload documents (e.g., PDFs) to the interface.
-Enter natural language queries (e.g., “Find budget reports from 2024”).
-View AI responses and collaborate with team members in real-time.
-Development Status
-Completed: Smart search, summarization, real-time collaboration.
-In Progress: Testing with sample PDFs and text files.
-Planned: Expanded file support (Word, slides), authentication.
-Challenges Overcome
-Real-Time Sync: Firebase integration for Bubble’s limitations.
-File Parsing: PyPDF2 for efficient PDF processing.
-Performance: Pre-indexed embeddings for fast AI responses.
-Future Enhancements
-Support for additional formats (e.g., PowerPoint).
-Domain-specific AI fine-tuning.
-User authentication and role-based access.
+## 🎮 Usage Guide
+1. Open the **Bubble app** in a browser.
+2. Upload sample **PDFs/text files**.
+3. Enter natural language queries (e.g., _“Find budget reports”_).
+4. Collaborate with team members in **real-time**.
 
-Team
-Sumit kumar - Lead Developer
-Shubh Raj Gupta - Backend developer
-Kumari Shambhavi - Ui/Ux developer
-Nabasmita Shanti Ui developer
-License
-MIT License - free to use and modify for non-commercial purposes.
- 
+---
+
+## ⚙️ Development Stage
+✅ **Core Features Implemented:** Search, Summaries, Collaboration.  
+✅ **Tested with PDFs**; expandable to other formats.  
+✅ **GitHub Submission Naming:** `hackathon-teamname-docuai`.  
+
+---
+
+## 🚧 Challenges & Solutions
+### 1️⃣ Real-Time Collaboration
+**Problem:** Bubble lacks WebSocket support.  
+**Solution:** Integrated **Firebase Realtime Database**.
+
+### 2️⃣ Multi-Format File Support
+**Problem:** Initial version supports only PDFs.  
+**Solution:** Used **PyPDF2**, future updates will support **Word/PowerPoint**.
+
+### 3️⃣ Performance Optimization
+**Problem:** AI-based search can be slow.  
+**Solution:** Pre-indexed **vector embeddings** ensure fast responses.
+
+---
+
+## 🔮 Future Enhancements
+🔹 Support for **Word, PowerPoint files**.  
+🔹 Fine-tuned AI for **enterprise datasets**.  
+🔹 **User authentication** for secure access.  
+
+---
+
+## 👥 Team
+| Name | Role |
+|------|------|
+| [Sumit kumar] | Lead developer |
+| [Shubh Raj Gupta ] | [Backend developer] |
+| [Kumari Shambhavi] | [UI/UX Developer] |
+| [Nabasmita Shanti] | 
+
+---
+
+## 📜 License
+**MIT License** - Free to use and modify for commercial and non-commercial purposes.
+
+---
+
+## 📌 Notes
+🔹 Replace placeholders like **[HackIndia 2025]**, **[Chainfinity]**, and team details before submission.  
+🔹 Adjust technical details if your stack changes (e.g., different database or AI model).  
+
+---
+
+🎉 **Built with passion for [HackIndia 2025 ] - April 01, 2025!** 🚀
