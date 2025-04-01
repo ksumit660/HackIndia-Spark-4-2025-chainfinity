@@ -10,6 +10,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { VideoBackground } from './components/VideoBackground';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
+import { Help } from './pages/Help';
 
 // Separate AppContent component to handle navigation
 const AppContent: React.FC = () => {
@@ -45,6 +46,11 @@ const AppContent: React.FC = () => {
 
   const handleServicesClick = () => {
     navigate('/services');
+    setIsSidebarOpen(false);
+  };
+
+  const handleHelpClick = () => {
+    navigate('/help');
     setIsSidebarOpen(false);
   };
 
@@ -97,7 +103,10 @@ const AppContent: React.FC = () => {
               <Settings size={20} />
               <span>Services</span>
             </div>
-            <div className="flex items-center space-x-3 text-white hover:text-gray-300 cursor-pointer">
+            <div 
+              onClick={handleHelpClick}
+              className="flex items-center space-x-3 text-white hover:text-gray-300 cursor-pointer"
+            >
               <HelpCircle size={20} />
               <span>Help</span>
             </div>
@@ -132,6 +141,7 @@ const AppContent: React.FC = () => {
           <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/help" element={<Help />} />
           
           {/* Landing Page Route */}
           <Route path="/" element={user ? <Navigate to="/dashboard" /> : (
