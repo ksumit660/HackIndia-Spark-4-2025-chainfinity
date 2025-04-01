@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { VideoBackground } from '../components/VideoBackground';
 import { HelpCircle, Mail, MessageSquare, Phone, Plus, Minus } from 'lucide-react';
+import { ChatBot } from '../components/ChatBot';
 
 export const Help: React.FC = () => {
+  const [showChat, setShowChat] = useState(false);
+
   return (
     <div className="min-h-screen w-full">
       <VideoBackground />
@@ -23,6 +26,7 @@ export const Help: React.FC = () => {
               title="Live Chat"
               description="Chat with our support team"
               action="Start Chat"
+              onClick={() => setShowChat(true)}
             />
             <ContactCard
               icon={<Mail className="w-6 h-6" />}
@@ -37,6 +41,8 @@ export const Help: React.FC = () => {
               action="Call Now"
             />
           </div>
+
+          {showChat && <ChatBot onClose={() => setShowChat(false)} />}
 
           <section className="space-y-6">
             <h2 className="text-2xl font-semibold text-white mb-6">Frequently Asked Questions</h2>
@@ -57,12 +63,16 @@ const ContactCard: React.FC<{
   title: string;
   description: string;
   action: string;
-}> = ({ icon, title, description, action }) => (
+  onClick?: () => void;
+}> = ({ icon, title, description, action, onClick }) => (
   <div className="glass-effect rounded-xl p-6 text-center">
     <div className="text-blue-400 mb-4">{icon}</div>
     <h3 className="text-white font-semibold mb-2">{title}</h3>
     <p className="text-gray-300 mb-4">{description}</p>
-    <button className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+    <button 
+      onClick={onClick}
+      className="text-blue-400 hover:text-blue-300 text-sm font-medium"
+    >
       {action}
     </button>
   </div>
