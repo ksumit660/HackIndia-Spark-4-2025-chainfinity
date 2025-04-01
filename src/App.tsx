@@ -1,6 +1,6 @@
 // Import necessary dependencies from React and other libraries
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { Menu, X, Home, Settings, Users, HelpCircle, LogIn } from 'lucide-react';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -8,45 +8,26 @@ import { Dashboard } from './pages/Dashboard';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { VideoBackground } from './components/VideoBackground';
+import { About } from './pages/About';
+import { Services } from './pages/Services';
 
-/**
- * Main Application Component
- * Handles routing, authentication, and main layout structure
- */
-function App() {
-  // State management for sidebar, user authentication, and loading
+// Separate AppContent component to handle navigation
+const AppContent: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  /**
-   * Toggle sidebar visibility
-   */
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  /**
-   * Navigate to home page and close sidebar
-   */
+  // Move all the handlers and effects here
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleHomeClick = () => {
     navigate('/');
     setIsSidebarOpen(false);
   };
-
-  /**
-   * Navigate to login page and close sidebar
-   */
   const handleLoginClick = () => {
     navigate('/login');
     setIsSidebarOpen(false);
   };
-
-  /**
-   * Handle user sign out
-   * Logs out user and redirects to login page
-   */
   const handleSignOut = async () => {
     try {
       await auth.signOut();
@@ -57,30 +38,31 @@ function App() {
     }
   };
 
-  /**
-   * Effect hook to handle authentication state changes
-   * Sets up and cleans up auth state listener
-   */
+  const handleAboutClick = () => {
+    navigate('/about');
+    setIsSidebarOpen(false);
+  };
+
+  const handleServicesClick = () => {
+    navigate('/services');
+    setIsSidebarOpen(false);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
-  // Loading state display
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen flex relative">
-      {/* Sidebar Component
-          Contains navigation links and auth actions
-          Uses glass effect styling */}
-      <div className={`sidebar fixed h-full w-64 glass-effect z-50 flex flex-col ${isSidebarOpen ? '' : 'closed'}`}>
+    <div className="min-h-screen w-full">
+      <div className={`sidebar fixed h-full w-64 glass-effect z-50 flex flex-col ${isSidebarOpen ? '' : 'translate-x-[-100%]'}`}>
         {/* Close button */}
         <button 
           onClick={toggleSidebar}
@@ -101,11 +83,17 @@ function App() {
               <Home size={20} />
               <span>Home</span>
             </div>
-            <div className="flex items-center space-x-3 text-white hover:text-gray-300 cursor-pointer">
+            <div 
+              onClick={handleAboutClick}
+              className="flex items-center space-x-3 text-white hover:text-gray-300 cursor-pointer"
+            >
               <Users size={20} />
               <span>About Us</span>
             </div>
-            <div className="flex items-center space-x-3 text-white hover:text-gray-300 cursor-pointer">
+            <div 
+              onClick={handleServicesClick}
+              className="flex items-center space-x-3 text-white hover:text-gray-300 cursor-pointer"
+            >
               <Settings size={20} />
               <span>Services</span>
             </div>
@@ -126,8 +114,7 @@ function App() {
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1">
+      <main className="w-full min-h-screen relative">
         {/* Sidebar toggle button */}
         <button 
           onClick={toggleSidebar}
@@ -143,10 +130,12 @@ function App() {
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
           <Route path="/register" element={!user ? <Register /> : <Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
           
           {/* Landing Page Route */}
           <Route path="/" element={user ? <Navigate to="/dashboard" /> : (
-            <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+            <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center relative">
               {/* Video Background Component */}
               <VideoBackground />
               
@@ -178,9 +167,14 @@ function App() {
             </div>
           )} />
         </Routes>
-      </div>
+      </main>
     </div>
   );
+};
+
+// Simplified App component
+function App() {
+  return <AppContent />;
 }
 
 export default App;
